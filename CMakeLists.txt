@@ -7,7 +7,7 @@ project(hope)
 #Comment this if don't want debug
 #set(CMAKE_BUILD_TYPE Debug)
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O1")
-find_package(PCL 1.7 REQUIRED)
+find_package(PCL 1.8 REQUIRED)
 
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
@@ -82,12 +82,12 @@ target_link_libraries(${PROJECT_NAME} fmc ${catkin_LIBRARIES})
 add_executable(${PROJECT_NAME}_node src/hope_node.cpp)
 
 # Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES} ${PROJECT_NAME} ${GLOG_LIB} ${OpenCV_LIBS})
+target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES} ${PROJECT_NAME} ${GLOG_LIB} ${OpenCV_LIBS} ${PCL_LIBRARIES} )
 
 add_executable(${PROJECT_NAME}_ros src/hope_ros.cpp)
 
 # Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_ros ${catkin_LIBRARIES} ${PROJECT_NAME} ${GLOG_LIB} ${OpenCV_LIBS})
+target_link_libraries(${PROJECT_NAME}_ros ${catkin_LIBRARIES} ${PROJECT_NAME} ${GLOG_LIB} ${OpenCV_LIBS} ${PCL_LIBRARIES} )
 
 add_executable(view_cloud src/view_cloud.cpp)
-target_link_libraries(view_cloud ${PCL_LIBRARIES})
+target_link_libraries(view_cloud ${PCL_LIBRARIES} )

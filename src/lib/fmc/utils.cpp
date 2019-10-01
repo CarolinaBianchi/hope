@@ -22,7 +22,7 @@
 bool fexists(const char *filename)
 {
 	ifstream ifile(filename);
-	return ifile;
+	return (bool)ifile;
 }
 
 double wtime() // returns wall time in seconds
