@@ -1,0 +1,15 @@
+<launch>
+	<param name="use_sim_time" value="true" />
+	<node name="hope_ros" pkg="hope" type="hope_ros" args=""/>
+	
+	<node name="map_bl" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 map base_link 100"/>
+	<node name="camera_bl" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 ifm3d/camera_link base_link 100"/>
+	
+	<group ns="bg">
+		<!--rosbag play - - clock /home/carolina/catkin_ws/src/hope/BAGS/ifmbag.bag ifm3d/camera/cloud:=/camera/depth/points-->
+		<remap from="/ifm3d/camera/cloud" to="/camera/depth/points"/>
+		<arg name="path" default="/home/carolina/catkin_ws/src/hope/BAGS/" />
+		<arg name="file" default="ifmbag.bag" />
+		<node pkg="rosbag" type="play" name="player" output="screen" args="--clock $(arg path)$(arg file)" />
+	</group>	
+</launch>
